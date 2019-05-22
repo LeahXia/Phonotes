@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Yuv-Fm-5Xd">
+                                <rect key="frame" x="75.5" y="92.5" width="263" height="263"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Yuv-Fm-5Xd" secondAttribute="height" multiplier="1:1" id="7S4-b8-K9L"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhoNotes" translatesAutoresizingMaskIntoConstraints="NO" id="ph8-YL-VEU">
+                                <rect key="frame" x="58.5" y="400.5" width="297" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="297" id="iP8-ko-bin"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leah Xia" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdY-Pb-2BH">
+                                <rect key="frame" x="42" y="852" width="330" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.11372549019607843" green="0.11372549019607843" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="EdY-Pb-2BH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="48b-vI-zlM"/>
+                            <constraint firstItem="Yuv-Fm-5Xd" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.5" id="BhI-MU-PLq"/>
+                            <constraint firstItem="Yuv-Fm-5Xd" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Ds9-j0-urr"/>
+                            <constraint firstItem="ph8-YL-VEU" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="E1g-rH-OqU"/>
+                            <constraint firstItem="EdY-Pb-2BH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="42" id="K3S-W3-pkc"/>
+                            <constraint firstAttribute="bottom" secondItem="EdY-Pb-2BH" secondAttribute="bottom" constant="23" id="g0Q-e4-LWn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EdY-Pb-2BH" secondAttribute="trailing" constant="42" id="gtw-s1-2vr"/>
+                            <constraint firstItem="ph8-YL-VEU" firstAttribute="top" secondItem="Yuv-Fm-5Xd" secondAttribute="bottom" constant="45" id="r2e-gG-vcd"/>
+                            <constraint firstItem="Yuv-Fm-5Xd" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.635" id="y2o-91-2xs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Logo" width="296" height="297"/>
+        <image name="PhoNotes" width="250" height="64"/>
+    </resources>
+</document>
