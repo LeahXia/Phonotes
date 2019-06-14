@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  NoteTakingViewController.swift
 //  Phonotes
 //
 //  Created by Leah Xia on 2019-05-19.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class NotesViewController: UIViewController {
+class NoteTakingViewController: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var photoDateLabel: UILabel!
+    @IBOutlet weak var creationDateLabel: UILabel!
     @IBOutlet weak var largePhotoImageView: UIImageView!
     @IBOutlet weak var noteTitleTextField: UITextField!
     @IBOutlet weak var noteTitleEditButton: UIButton!
@@ -23,31 +23,25 @@ class NotesViewController: UIViewController {
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var photoCollectionViewHeightConstraint: NSLayoutConstraint!
 
-    // MARK: - Constants
-    let photoCellId = "photoPreviewCellId"
+    private var viewModel: NoteTakingViewModel?
     
-    // MARK: - Variables
-    let photos = [
-        Photo(photo: #imageLiteral(resourceName: "demo-photo1"), photoDate: "March 19, 2019", hasNote: false, noteTitle: "Time with Allen at UBC 1", noteDetail: "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt."),
-        Photo(photo: #imageLiteral(resourceName: "demo-photo3"), photoDate: "March 20, 2019", hasNote: true, noteTitle: "Work out day 2", noteDetail: "20 jumps."),
-        Photo(photo: #imageLiteral(resourceName: "demo-photo1"), photoDate: "March 21, 2019", hasNote: true, noteTitle: "Time with Allen at UBC 3", noteDetail: "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt."),
-        Photo(photo: #imageLiteral(resourceName: "demo-photo2"), photoDate: "March 22, 2019", hasNote: false, noteTitle: "@Emily 4", noteDetail: "Beautiful smile."),
-        Photo(photo: #imageLiteral(resourceName: "demo-photo1"), photoDate: "March 23, 2019", hasNote: true, noteTitle: "Time with Allen at UBC 5", noteDetail: "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt."),
-        Photo(photo: #imageLiteral(resourceName: "demo-photo3"), photoDate: "March 20, 2019", hasNote: true, noteTitle: "Work out day 6", noteDetail: "20 jumps."),
-        Photo(photo: #imageLiteral(resourceName: "demo-photo1"), photoDate: "March 21, 2019", hasNote: true, noteTitle: "Time with Allen at UBC 7", noteDetail: "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt."),
-        Photo(photo: #imageLiteral(resourceName: "demo-photo1"), photoDate: "March 19, 2019", hasNote: false, noteTitle: "Time with Allen at UBC 8", noteDetail: "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt."),
-        Photo(photo: #imageLiteral(resourceName: "demo-photo2"), photoDate: "March 22, 2019", hasNote: false, noteTitle: "@Emily 9", noteDetail: "Beautiful smile."),
-        Photo(photo: #imageLiteral(resourceName: "demo-photo1"), photoDate: "March 23, 2019", hasNote: true, noteTitle: "Time with Allen at UBC 10", noteDetail: "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt.")
-    ]
-    var selectedIndex = IndexPath(item: 2, section: 0)
+    // MARK: - Constants & Variables
+    let photoCellId = "photoPreviewCellId"
     var collectionViewHeight:CGFloat = 162
+    let minimumLineSpacing: CGFloat = 8.5
 
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel = NoteTakingViewModel(vc: self)
         setStyle()
         addKeyboardObserver()
         setTextDelegate()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.initPhotoLibrary()
     }
     
     override func viewWillLayoutSubviews() {
@@ -63,15 +57,19 @@ class NotesViewController: UIViewController {
         if let layout = photosCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
             layout.minimumInteritemSpacing = 0
-            layout.minimumLineSpacing = 8.5
-            let cellWidth = (view.bounds.width - 34) / 5 // 8.5 * 4 = 34
+            layout.minimumLineSpacing = minimumLineSpacing
+            let cellWidth = (view.bounds.width - minimumLineSpacing * 4) / 5 // 5 horizontal cells
             layout.itemSize = CGSize(width: cellWidth, height: collectionViewHeight - 1)
+            
+            // Set thumbnail image size to the cell's size so we don't need to load all our phone photos in a large size
+            viewModel?.setThumbnailSizeForPhotoManager(size: layout.itemSize)
         }
         
         // Make scroll view scrollable for iPhone 5
+        let detailTextViewMinHeight: CGFloat = 59
         let detailTextViewHeight = noteDetailTextView.bounds.height
-        if detailTextViewHeight < 59 {
-            contentViewHeightConstraint.constant += 59 - detailTextViewHeight
+        if detailTextViewHeight < detailTextViewMinHeight {
+            contentViewHeightConstraint.constant += detailTextViewMinHeight - detailTextViewHeight
         }
     }
     
@@ -79,6 +77,8 @@ class NotesViewController: UIViewController {
         // Remove keyboard listener
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        viewModel?.photoManager.removePHPhotoObserver()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -98,6 +98,66 @@ class NotesViewController: UIViewController {
         noteDetailTextView.textContainerInset = UIEdgeInsets(top: 10, left: 21, bottom: 10, right: 21)
     }
     
+    @IBAction func NoteTitleEditButtontapped(_ sender: Any) {
+        noteTitleTextField.becomeFirstResponder()
+    }
+}
+
+// MARK: - CollectionView
+extension NoteTakingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel?.numberOfItems() ?? 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = photosCollectionView.dequeueReusableCell(withReuseIdentifier: photoCellId, for: indexPath) as? PhotoPreviewCollectionViewCell
+        else {
+            return UICollectionViewCell()
+        }
+        configCell(cell: cell, indexPath: indexPath)
+        return cell
+    }
+    
+    func configCell(cell: PhotoPreviewCollectionViewCell, indexPath: IndexPath) {
+        let photo = viewModel?.getPhotoForCell(forCell: cell, atIndexPath: indexPath)
+        let hasBorder = indexPath == viewModel?.selectedIndexPath
+        cell.setupCell(photo: photo, hasBorder: hasBorder)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let prevSelectedIndex = viewModel?.selectedIndexPath ?? IndexPath(item: 2, section: 0)
+        if let prevCell = photosCollectionView.cellForItem(at: prevSelectedIndex) as? PhotoPreviewCollectionViewCell {
+            prevCell.removeBorder()
+        }
+        
+        if let cell = photosCollectionView.cellForItem(at: indexPath) as? PhotoPreviewCollectionViewCell {
+            cell.setBorder()
+            populateViewWithSelectedPhotoInfo(forCell: cell, atIndexPath: indexPath)
+        }
+        
+        viewModel?.updateSelectedIndexPath(atIndexPath: indexPath)
+        photosCollectionView.reloadItems(at: [prevSelectedIndex])
+    }
+    
+    func populateViewWithSelectedPhotoInfo(forCell cell: PhotoPreviewCollectionViewCell, atIndexPath indexPath: IndexPath) {
+        guard let photo = viewModel?.getPhotoForCell(forCell: cell, atIndexPath: indexPath) else { return }
+        creationDateLabel.text = photo.getFormattedCreationDate()
+        if photo.hasNote {
+            noteTitleTextField.text = photo.noteTitle
+            noteDetailTextView.text = photo.noteDetail
+        } else {
+            noteTitleTextField.text = ""
+            noteDetailTextView.text = Constants.defaultNoteDetail
+        }
+        // Load large image of the selected cell and assign it to largePhotoImageView
+        viewModel?.loadLargeImage(for: photo) { [weak self] (image) in
+            self?.largePhotoImageView.image = image
+        }
+    }
+}
+
+// MARK: - Keyboard
+extension NoteTakingViewController {
     func addKeyboardObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -106,7 +166,7 @@ class NotesViewController: UIViewController {
     @objc func keyboardWillChange(notification: Notification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         let keyboardHeight = keyboardSize.height
-
+        
         if notification.name == UIResponder.keyboardWillShowNotification {
             keyboardWillShow(notification, keyboardHeight: keyboardHeight)
         } else {
@@ -121,7 +181,7 @@ class NotesViewController: UIViewController {
         })
         // Move up if keyboard hide input field
         let distanceToBottom = self.scrollView.frame.size.height - noteDetailTextView.frame.origin.y - noteDetailTextView.frame.size.height + collectionViewHeight - 20
-
+        
         let collapseSpace = keyboardHeight - distanceToBottom
         guard collapseSpace >= 0 else { return }
         UIView.animate(withDuration: 0.3, animations: {
@@ -136,60 +196,10 @@ class NotesViewController: UIViewController {
             self.scrollView.contentOffset = .zero
         }
     }
-
-    @IBAction func NoteTitleEditButtontapped(_ sender: Any) {
-        noteTitleTextField.becomeFirstResponder()
-    }
 }
 
-extension NotesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = photosCollectionView.dequeueReusableCell(withReuseIdentifier: photoCellId, for: indexPath) as! PhotoPreviewCollectionViewCell
-        configCell(cell: cell, indexPath: indexPath)
-        return cell
-    }
-    
-    func configCell(cell: PhotoPreviewCollectionViewCell, indexPath: IndexPath) {
-        let photoPath = photos[indexPath.row]
-        cell.setupCell(photo: photoPath)
-        if indexPath == selectedIndex {
-            cell.setBorder()
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let prevSelectedIndex = selectedIndex
-        if let prevCell = photosCollectionView.cellForItem(at: prevSelectedIndex) as? PhotoPreviewCollectionViewCell {
-            prevCell.removeBorder()
-        }
-        
-        selectedIndex = indexPath
-        
-        if let cell = photosCollectionView.cellForItem(at: indexPath) as? PhotoPreviewCollectionViewCell {
-            cell.setBorder()
-        }
-        
-        // Populate view with selected photo info
-        let photo = photos[indexPath.row]
-        photoDateLabel.text = photo.photoDate
-        largePhotoImageView.image = photo.photo
-        if photo.hasNote {
-            noteTitleTextField.text = photo.noteTitle
-            noteDetailTextView.text = photo.noteDetail
-        } else {
-            noteTitleTextField.text = ""
-            noteDetailTextView.text = Constants.defaultNoteDetail
-        }
-        
-        photosCollectionView.reloadItems(at: [prevSelectedIndex])
-    }
-}
-
-extension NotesViewController: UITextFieldDelegate, UITextViewDelegate {
+// MARK: - TextField & TextView
+extension NoteTakingViewController: UITextFieldDelegate, UITextViewDelegate {
     func setTextDelegate() {
         noteTitleTextField.delegate = self
         noteDetailTextView.delegate = self

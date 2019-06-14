@@ -14,18 +14,18 @@ class PhotoPreviewCollectionViewCell: UICollectionViewCell {
     @IBOutlet var noteIndicator: UIView!
    
     // MARK: - Variables
+    var representedAssetIdentifier: String?
+    
     var photo: Photo?
     
-    func setupCell(photo: Photo) {
-        self.photo = photo
-        setStyle()
-    }
-    
-    func setStyle() {
-        noteIndicator.layer.cornerRadius = 2
+    func setupCell(photo: Photo?, hasBorder: Bool) {
         guard let photo = photo else { return }
+        noteIndicator.layer.cornerRadius = 2
         photoImageView.image = photo.photo
         noteIndicator.isHidden = !photo.hasNote
+        if hasBorder {
+            setBorder()
+        }
     }
     
     func setBorder() {

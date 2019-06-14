@@ -7,21 +7,32 @@
 //
 
 import UIKit
+import Photos
 
-struct Photo {
+class Photo {
     var photoId: String
     var photo: UIImage
-    var photoDate: String
+    var creationDate: Date?
+    var asset: PHAsset
     var hasNote: Bool
     var noteTitle: String?
     var noteDetail: String?
     
-    init(photoId: String = "123", photo: UIImage, photoDate: String, hasNote: Bool, noteTitle: String?, noteDetail: String?) {
+    init(photoId: String, photo: UIImage, creationDate: Date?, asset: PHAsset, hasNote: Bool = false, noteTitle: String?, noteDetail: String?) {
         self.photoId = photoId
         self.photo = photo
-        self.photoDate = photoDate
+        self.creationDate = creationDate
+        self.asset = asset
         self.hasNote = hasNote
         self.noteTitle = noteTitle
         self.noteDetail = noteDetail
+    }
+    
+    func getFormattedCreationDate() -> String {
+        return "\(self.creationDate?.dateFormatterOfMonthDayYear() ?? "")"
+    }
+    
+    func updateToLargePhoto(largePhoto: UIImage) {
+        self.photo = largePhoto
     }
 }

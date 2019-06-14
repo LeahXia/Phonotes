@@ -1,14 +1,15 @@
 //
-//  PhonotesUITests.swift
+//  NoteTakingVCUITests.swift
 //  PhonotesUITests
 //
-//  Created by Leah Xia on 2019-05-19.
+//  Created by Leah Xia on 2019-06-08.
 //  Copyright © 2019 Leah Xia. All rights reserved.
 //
 
 import XCTest
 
-class PhonotesUITests: XCTestCase {
+class NoteTakingVCUITests: XCTestCase {
+    var app: XCUIApplication!
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -17,7 +18,8 @@ class PhonotesUITests: XCTestCase {
         continueAfterFailure = false
 
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
+        app = XCUIApplication()
+        app.launch()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
@@ -26,6 +28,9 @@ class PhonotesUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    /* 1.0.1 Basic UI
+     
+     */
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.

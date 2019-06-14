@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08BA8CFD22AC33E20067F4AC /* NoteTakingVCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA8CFC22AC33E20067F4AC /* NoteTakingVCUITests.swift */; };
+		08BA8CFE22AC92EF0067F4AC /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F603FC22926E8F000B5E96 /* Photo.swift */; };
+		08BA8D0122ACD3F00067F4AC /* NoteTakingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA8D0022ACD3F00067F4AC /* NoteTakingViewModel.swift */; };
+		08BA8D0522ADF0B40067F4AC /* PhotoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA8D0422ADF0B40067F4AC /* PhotoTests.swift */; };
+		08BA8D0722ADF6990067F4AC /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA8D0622ADF6990067F4AC /* PhotoManager.swift */; };
+		08BA8D8722B21DE60067F4AC /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA8D8622B21DE60067F4AC /* DateExtension.swift */; };
 		08F603C2229211AE000B5E96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F603C1229211AE000B5E96 /* AppDelegate.swift */; };
-		08F603C4229211AE000B5E96 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F603C3229211AE000B5E96 /* NotesViewController.swift */; };
+		08F603C4229211AE000B5E96 /* NoteTakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F603C3229211AE000B5E96 /* NoteTakingViewController.swift */; };
 		08F603C7229211AE000B5E96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08F603C5229211AE000B5E96 /* Main.storyboard */; };
 		08F603CC229211B0000B5E96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08F603CA229211B0000B5E96 /* LaunchScreen.storyboard */; };
-		08F603D7229211B1000B5E96 /* PhonotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F603D6229211B1000B5E96 /* PhonotesTests.swift */; };
-		08F603E2229211B1000B5E96 /* PhonotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F603E1229211B1000B5E96 /* PhonotesUITests.swift */; };
 		08F603F422921F5C000B5E96 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F603F322921F5C000B5E96 /* Colors.swift */; };
 		08F603F622922154000B5E96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08F603F522922154000B5E96 /* Assets.xcassets */; };
 		08F603F9229232A8000B5E96 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 08F603F8229232A1000B5E96 /* SF-Pro-Display-Medium.otf */; };
@@ -40,17 +44,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08BA8CFC22AC33E20067F4AC /* NoteTakingVCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTakingVCUITests.swift; sourceTree = "<group>"; };
+		08BA8D0022ACD3F00067F4AC /* NoteTakingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTakingViewModel.swift; sourceTree = "<group>"; };
+		08BA8D0422ADF0B40067F4AC /* PhotoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTests.swift; sourceTree = "<group>"; };
+		08BA8D0622ADF6990067F4AC /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
+		08BA8D8622B21DE60067F4AC /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		08F603BE229211AE000B5E96 /* Phonotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phonotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08F603C1229211AE000B5E96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		08F603C3229211AE000B5E96 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		08F603C3229211AE000B5E96 /* NoteTakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTakingViewController.swift; sourceTree = "<group>"; };
 		08F603C6229211AE000B5E96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		08F603CB229211B0000B5E96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		08F603CD229211B0000B5E96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08F603D2229211B1000B5E96 /* PhonotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhonotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		08F603D6229211B1000B5E96 /* PhonotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonotesTests.swift; sourceTree = "<group>"; };
 		08F603D8229211B1000B5E96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08F603DD229211B1000B5E96 /* PhonotesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhonotesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		08F603E1229211B1000B5E96 /* PhonotesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonotesUITests.swift; sourceTree = "<group>"; };
 		08F603E3229211B1000B5E96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08F603F322921F5C000B5E96 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		08F603F522922154000B5E96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,6 +93,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08BA8CFF22ACD3950067F4AC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				08BA8D0022ACD3F00067F4AC /* NoteTakingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		08BA8D8522B21D960067F4AC /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				08BA8D8622B21DE60067F4AC /* DateExtension.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		08F603B5229211AE000B5E96 = {
 			isa = PBXGroup;
 			children = (
@@ -109,9 +132,11 @@
 		08F603C0229211AE000B5E96 /* Phonotes */ = {
 			isa = PBXGroup;
 			children = (
+				08BA8CFF22ACD3950067F4AC /* ViewModel */,
 				08F603F022921F21000B5E96 /* Controllers */,
 				08F603F122921F38000B5E96 /* Views */,
 				08F603F222921F3E000B5E96 /* Models */,
+				08BA8D8522B21D960067F4AC /* Helper */,
 				08F603EF22921F0D000B5E96 /* Constants */,
 				08F603F72292319A000B5E96 /* Fonts */,
 				08F603C1229211AE000B5E96 /* AppDelegate.swift */,
@@ -124,8 +149,8 @@
 		08F603D5229211B1000B5E96 /* PhonotesTests */ = {
 			isa = PBXGroup;
 			children = (
-				08F603D6229211B1000B5E96 /* PhonotesTests.swift */,
 				08F603D8229211B1000B5E96 /* Info.plist */,
+				08BA8D0422ADF0B40067F4AC /* PhotoTests.swift */,
 			);
 			path = PhonotesTests;
 			sourceTree = "<group>";
@@ -133,8 +158,8 @@
 		08F603E0229211B1000B5E96 /* PhonotesUITests */ = {
 			isa = PBXGroup;
 			children = (
-				08F603E1229211B1000B5E96 /* PhonotesUITests.swift */,
 				08F603E3229211B1000B5E96 /* Info.plist */,
+				08BA8CFC22AC33E20067F4AC /* NoteTakingVCUITests.swift */,
 			);
 			path = PhonotesUITests;
 			sourceTree = "<group>";
@@ -152,7 +177,7 @@
 		08F603F022921F21000B5E96 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				08F603C3229211AE000B5E96 /* NotesViewController.swift */,
+				08F603C3229211AE000B5E96 /* NoteTakingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -171,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				08F603FC22926E8F000B5E96 /* Photo.swift */,
+				08BA8D0622ADF6990067F4AC /* PhotoManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -258,6 +284,7 @@
 					};
 					08F603DC229211B1000B5E96 = {
 						CreatedOnToolsVersion = 10.2;
+						LastSwiftMigration = 1020;
 						TestTargetID = 08F603BD229211AE000B5E96;
 					};
 				};
@@ -316,11 +343,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				08F6040122928F7B000B5E96 /* Fonts.swift in Sources */,
-				08F603C4229211AE000B5E96 /* NotesViewController.swift in Sources */,
+				08F603C4229211AE000B5E96 /* NoteTakingViewController.swift in Sources */,
 				08F603F422921F5C000B5E96 /* Colors.swift in Sources */,
 				08F603FB22926027000B5E96 /* PhotoPreviewCollectionViewCell.swift in Sources */,
+				08BA8D0122ACD3F00067F4AC /* NoteTakingViewModel.swift in Sources */,
 				08F603C2229211AE000B5E96 /* AppDelegate.swift in Sources */,
+				08BA8D8722B21DE60067F4AC /* DateExtension.swift in Sources */,
 				08F603FD22926E8F000B5E96 /* Photo.swift in Sources */,
+				08BA8D0722ADF6990067F4AC /* PhotoManager.swift in Sources */,
 				08F603FF22927D82000B5E96 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,7 +359,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08F603D7229211B1000B5E96 /* PhonotesTests.swift in Sources */,
+				08BA8D0522ADF0B40067F4AC /* PhotoTests.swift in Sources */,
+				08BA8CFE22AC92EF0067F4AC /* Photo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +368,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08F603E2229211B1000B5E96 /* PhonotesUITests.swift in Sources */,
+				08BA8CFD22AC33E20067F4AC /* NoteTakingVCUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,6 +607,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z5L7CT92A6;
 				INFOPLIST_FILE = PhonotesUITests/Info.plist;
@@ -586,6 +618,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Leah-Xia.PhonotesUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Phonotes;
@@ -596,6 +629,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z5L7CT92A6;
 				INFOPLIST_FILE = PhonotesUITests/Info.plist;

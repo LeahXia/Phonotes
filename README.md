@@ -21,3 +21,6 @@ By [Leah Xia](http://leahxia.com) ([leahxia5@gmail.com](mailto:leahxia5@gmail.co
 
 ## Library and SDKs
 • TBD
+
+## Case Study
+[Part 1: UI challenges](https://medium.com/@leahxia5/ios-app-case-study-phonotes-part-1-ui-39051a6f0c71?source=messageShare-f87818f6589b-1560492467&_branch_match_id=667963676943393739)
