@@ -34,7 +34,7 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
             // The cell may have been recycled by the time this handler gets called;
             // set the cell's thumbnail image only if it's still showing the same asset.
             if cell.representedAssetIdentifier == asset.localIdentifier, let image = image {
-                photo = Photo(photoId: asset.localIdentifier, photo: image, creationDate: asset.creationDate, asset: asset, noteTitle: nil, noteDetail: nil)
+                photo = Photo(photoId: asset.localIdentifier, photo: image, creationDate: asset.creationDate, asset: asset)
             }
         })
         return photo

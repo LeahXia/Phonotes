@@ -30,7 +30,8 @@ class PhotoPreviewCollectionViewCell: UICollectionViewCell {
         }
         noteIndicator.layer.cornerRadius = 2
         photoImageView.image = photo.photo
-        noteIndicator.isHidden = !photo.hasNote
+        let hasNote = photo.note?.hasNote ?? false
+        noteIndicator.isHidden = !hasNote
     }
     
     func setBorder() {

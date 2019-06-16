@@ -1,0 +1,6 @@
+framework module Pods_Phonotes {
+  umbrella header "Pods-Phonotes-umbrella.h"
+
+  export *
+  module * { export * }
+}

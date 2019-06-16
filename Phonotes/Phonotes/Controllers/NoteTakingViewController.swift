@@ -160,19 +160,20 @@ extension NoteTakingViewController: UICollectionViewDelegate, UICollectionViewDa
         
         if let cell = photosCollectionView.cellForItem(at: indexPath) as? PhotoPreviewCollectionViewCell {
             cell.setBorder()
-            populateViewWithSelectedPhotoInfo(forCell: cell, atIndexPath: indexPath)
+            viewModel?.setCurrentSelectedPhoto(cell: cell, indexPath: indexPath)
+            populateViewWithSelectedPhotoInfo()
         }
         
         viewModel?.updateSelectedIndexPath(atIndexPath: indexPath)
         photosCollectionView.reloadItems(at: [prevSelectedIndex])
     }
     
-    func populateViewWithSelectedPhotoInfo(forCell cell: PhotoPreviewCollectionViewCell, atIndexPath indexPath: IndexPath) {
-        guard let photo = viewModel?.getPhotoForCell(forCell: cell, atIndexPath: indexPath) else { return }
+    func populateViewWithSelectedPhotoInfo() {
+        guard let photo = viewModel?.getCurrentSelectedPhoto() else { return }
         creationDateLabel.text = photo.getFormattedCreationDate()
-        if photo.hasNote {
-            noteTitleTextField.text = photo.noteTitle
-            noteDetailTextView.text = photo.noteDetail
+        if photo.note?.hasNote ?? false {
+            noteTitleTextField.text = photo.note?.noteTitle
+            noteDetailTextView.text = photo.note?.noteDetail
         } else {
             noteTitleTextField.text = ""
             noteDetailTextView.text = Constants.defaultNoteDetail
@@ -239,6 +240,10 @@ extension NoteTakingViewController: UITextFieldDelegate, UITextViewDelegate {
         return false
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        updateNoteWhenDidEndEditing()
+    }
+    
     // MARK: - Text View
     // Mimic placeholder behaviour
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
@@ -255,6 +260,10 @@ extension NoteTakingViewController: UITextFieldDelegate, UITextViewDelegate {
         return true
     }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+        updateNoteWhenDidEndEditing()
+    }
+    
     // Mimic dismiss keyboard when should return
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if(text == "\n") {
@@ -262,5 +271,23 @@ extension NoteTakingViewController: UITextFieldDelegate, UITextViewDelegate {
             return false
         }
         return true
+    }
+    
+    // Helper
+    func updateNoteWhenDidEndEditing() {
+        guard let viewModel = viewModel else { return }
+        viewModel.saveNote() { [weak self] (errorMessage) in
+            if let errorMessage = errorMessage {
+                self?.showDefaultAlert(title: "Note not saved", message: errorMessage)
+            } else {
+                // Update the hasNote indicator real time
+                self?.photosCollectionView.reloadItems(at: [viewModel.selectedIndexPath])
+            }
+        }
+    }
+    
+    func showDefaultAlert(title: String?, message: String?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        present(alert, animated: true, completion: nil)
     }
 }
