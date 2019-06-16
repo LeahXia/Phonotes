@@ -48,7 +48,7 @@
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IE6-Fa-ySo">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlurryImageLarge" translatesAutoresizingMaskIntoConstraints="NO" id="IE6-Fa-ySo">
                                                 <rect key="frame" x="0.0" y="39" width="414" height="311"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="IE6-Fa-ySo" secondAttribute="height" multiplier="414:311" id="c9q-bK-Egx"/>
@@ -82,6 +82,38 @@
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textField>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWJ-Ru-dwq">
+                                                <rect key="frame" x="55.5" y="139" width="303" height="63"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="303" id="PMA-x9-iPy"/>
+                                                    <constraint firstAttribute="height" constant="63" id="wjm-bV-p1Q"/>
+                                                </constraints>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Tap to allow Phonotes access to your iPhone cameral roll.">
+                                                        <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <font key="NSFont" size="18" name="SFProDisplay-Medium"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="7" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIj-bz-cOy">
+                                                <rect key="frame" x="144" y="231" width="126" height="41"/>
+                                                <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="41" id="SvC-OT-qOm"/>
+                                                    <constraint firstAttribute="width" constant="126" id="Y0x-28-FLG"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="18"/>
+                                                <state key="normal" title="Get Access">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="getAccessButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nop-h7-33k"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -91,16 +123,20 @@
                                             <constraint firstItem="be0-t0-off" firstAttribute="leading" secondItem="Jze-Y7-fbF" secondAttribute="leading" constant="21" id="IRr-QA-fWy"/>
                                             <constraint firstAttribute="trailing" secondItem="luE-yL-BJf" secondAttribute="trailing" id="JIk-yY-yZw"/>
                                             <constraint firstAttribute="bottom" secondItem="luE-yL-BJf" secondAttribute="bottom" id="Jge-j8-OPF"/>
+                                            <constraint firstItem="FWJ-Ru-dwq" firstAttribute="centerX" secondItem="Jze-Y7-fbF" secondAttribute="centerX" id="LsV-YL-9te"/>
                                             <constraint firstItem="nCO-kM-DQ6" firstAttribute="centerX" secondItem="Jze-Y7-fbF" secondAttribute="centerX" id="TfG-E6-XZE"/>
                                             <constraint firstAttribute="trailing" secondItem="IE6-Fa-ySo" secondAttribute="trailing" id="UAC-sS-qVI"/>
                                             <constraint firstAttribute="trailing" secondItem="lUI-dC-GKn" secondAttribute="trailing" id="Vel-tm-jnw"/>
                                             <constraint firstItem="luE-yL-BJf" firstAttribute="leading" secondItem="Jze-Y7-fbF" secondAttribute="leading" id="WaV-4X-psl"/>
+                                            <constraint firstItem="sIj-bz-cOy" firstAttribute="centerX" secondItem="Jze-Y7-fbF" secondAttribute="centerX" id="a1n-60-oU2"/>
+                                            <constraint firstItem="IE6-Fa-ySo" firstAttribute="top" secondItem="FWJ-Ru-dwq" secondAttribute="top" constant="-100" id="aNZ-PF-Ru1"/>
                                             <constraint firstItem="wOT-MT-tti" firstAttribute="centerY" secondItem="be0-t0-off" secondAttribute="centerY" id="aVJ-a7-cn9"/>
                                             <constraint firstItem="IE6-Fa-ySo" firstAttribute="top" secondItem="nCO-kM-DQ6" secondAttribute="bottom" constant="9" id="cvr-II-DF2"/>
                                             <constraint firstItem="wOT-MT-tti" firstAttribute="leading" secondItem="be0-t0-off" secondAttribute="trailing" constant="4" id="eh6-3Q-xFV"/>
                                             <constraint firstItem="lUI-dC-GKn" firstAttribute="leading" secondItem="Jze-Y7-fbF" secondAttribute="leading" id="hU5-tl-HVR"/>
                                             <constraint firstAttribute="trailing" secondItem="wOT-MT-tti" secondAttribute="trailing" constant="6" id="o10-Es-yl5"/>
                                             <constraint firstItem="luE-yL-BJf" firstAttribute="top" secondItem="lUI-dC-GKn" secondAttribute="bottom" id="pVy-JF-rIe"/>
+                                            <constraint firstItem="sIj-bz-cOy" firstAttribute="top" secondItem="FWJ-Ru-dwq" secondAttribute="bottom" constant="29" id="tPm-Oi-xOU"/>
                                             <constraint firstItem="be0-t0-off" firstAttribute="top" secondItem="IE6-Fa-ySo" secondAttribute="bottom" constant="13" id="wGb-8g-9nj"/>
                                         </constraints>
                                     </view>
@@ -180,9 +216,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="allowAccessLabel" destination="FWJ-Ru-dwq" id="qv3-Nh-S4n"/>
                         <outlet property="contentView" destination="Jze-Y7-fbF" id="Lj6-ds-X1U"/>
                         <outlet property="contentViewHeightConstraint" destination="upb-c6-FHs" id="fsf-AM-ovl"/>
                         <outlet property="creationDateLabel" destination="nCO-kM-DQ6" id="vB9-QF-pGG"/>
+                        <outlet property="getAccessButton" destination="sIj-bz-cOy" id="apg-tI-iU1"/>
                         <outlet property="largePhotoImageView" destination="IE6-Fa-ySo" id="v7c-zy-cKp"/>
                         <outlet property="noteDetailTextView" destination="lUI-dC-GKn" id="Wjf-B0-yI1"/>
                         <outlet property="noteTitleEditButton" destination="wOT-MT-tti" id="mPz-Ou-h8T"/>
@@ -198,6 +236,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BlurryImageLarge" width="207" height="156"/>
         <image name="composeIcon" width="31" height="30"/>
     </resources>
 </document>

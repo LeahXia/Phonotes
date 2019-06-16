@@ -23,6 +23,9 @@ class NoteTakingViewController: UIViewController {
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var photoCollectionViewHeightConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var allowAccessLabel: UILabel!
+    @IBOutlet weak var getAccessButton: UIButton!
+    
     private var viewModel: NoteTakingViewModel?
     
     // MARK: - Constants & Variables
@@ -46,6 +49,9 @@ class NoteTakingViewController: UIViewController {
                 if status {
                     self?.viewModel?.initPhotoLibrary()
                     self?.photosCollectionView.reloadData()
+                } else {
+                    self?.allowAccessLabel.isHidden = false
+                    self?.getAccessButton.isHidden = false
                 }
             }
         }
@@ -103,10 +109,24 @@ class NoteTakingViewController: UIViewController {
         // Set text field/View style
         noteTitleTextField.attributedPlaceholder = NSAttributedString(string: Constants.defaultNoteTitle, attributes: [NSAttributedString.Key.foregroundColor: Colors.placeholderColor, NSAttributedString.Key.font: Fonts.SFmedium20!])
         noteDetailTextView.textContainerInset = UIEdgeInsets(top: 10, left: 21, bottom: 10, right: 21)
+        
+        // Allow Access
+        getAccessButton.layer.cornerRadius = 20.5
     }
     
     @IBAction func NoteTitleEditButtontapped(_ sender: Any) {
         noteTitleTextField.becomeFirstResponder()
+    }
+    
+    @IBAction func getAccessButtonTapped(_ sender: Any) {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(settingsUrl) {
+            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+            })
+        }
     }
 }
 
@@ -127,11 +147,12 @@ extension NoteTakingViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func configCell(cell: PhotoPreviewCollectionViewCell, indexPath: IndexPath) {
         let photo = viewModel?.getPhotoForCell(forCell: cell, atIndexPath: indexPath)
-        let hasBorder = indexPath == viewModel?.selectedIndexPath
-        cell.setupCell(photo: photo, hasBorder: hasBorder)
+        cell.setupCell(photo: photo, indexPath: indexPath, selectedIndexPath: viewModel?.selectedIndexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Disable selection if app has no access to photo album.
+        guard getAccessButton.isHidden else { return }
         let prevSelectedIndex = viewModel?.selectedIndexPath ?? IndexPath(item: 2, section: 0)
         if let prevCell = photosCollectionView.cellForItem(at: prevSelectedIndex) as? PhotoPreviewCollectionViewCell {
             prevCell.removeBorder()

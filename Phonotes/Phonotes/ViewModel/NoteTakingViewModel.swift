@@ -21,7 +21,7 @@ class NoteTakingViewModel: NSObject {
     }
     
     func numberOfItems() -> Int {
-        return photoManager.fetchResult?.count ?? 0
+        return photoManager.fetchResult?.count ?? 5
     }
     
     func getPhotoForCell(forCell cell: PhotoPreviewCollectionViewCell, atIndexPath indexPath: IndexPath) -> Photo? {
