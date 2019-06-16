@@ -11,7 +11,7 @@ import Photos
 
 class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
     
-    var fetchResult: PHFetchResult<PHAsset>!
+    var fetchResult: PHFetchResult<PHAsset>?
     
     fileprivate let imageManager = PHCachingImageManager()
     var thumbnailSize: CGSize = .zero
@@ -26,9 +26,9 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
     }
     
     func fetchPhoto(forCell cell: PhotoPreviewCollectionViewCell, atIndexPath indexPath: IndexPath) -> Photo? {
+        guard let asset = fetchResult?.object(at: indexPath.item) else { return nil }
         var photo: Photo?
-        let asset = fetchResult.object(at: indexPath.item)
-        
+
         cell.representedAssetIdentifier = asset.localIdentifier
         imageManager.requestImage(for: asset, targetSize: thumbnailSize, contentMode: .aspectFill, options: nil, resultHandler: { image, _ in
             // The cell may have been recycled by the time this handler gets called;
@@ -64,9 +64,28 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
         // main queue before acting on the change as we'll be updating the UI.
         DispatchQueue.main.sync {
             // Check each of the three top-level fetches for changes.
-            if let changeDetails = changeInstance.changeDetails(for: fetchResult) {
+            if let fetchResult = fetchResult, let changeDetails = changeInstance.changeDetails(for: fetchResult) {
                 // Update the cached fetch result.
-                fetchResult = changeDetails.fetchResultAfterChanges
+                self.fetchResult = changeDetails.fetchResultAfterChanges
+            }
+        }
+    }
+    
+    func requestPhotoLibraryPermission(completion: @escaping (Bool) -> Void) {
+        PHPhotoLibrary.requestAuthorization { status in
+            switch status {
+            case .authorized:
+                completion(true)
+                break
+            case .denied, .restricted:
+                completion(false)
+                break
+            case .notDetermined:
+                completion(false)
+                break
+            default:
+                completion(false)
+                break
             }
         }
     }

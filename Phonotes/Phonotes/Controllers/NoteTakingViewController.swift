@@ -41,7 +41,14 @@ class NoteTakingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel?.initPhotoLibrary()
+        viewModel?.photoManager.requestPhotoLibraryPermission { [weak self] (status) in
+            DispatchQueue.main.async {
+                if status {
+                    self?.viewModel?.initPhotoLibrary()
+                    self?.photosCollectionView.reloadData()
+                }
+            }
+        }
     }
     
     override func viewWillLayoutSubviews() {

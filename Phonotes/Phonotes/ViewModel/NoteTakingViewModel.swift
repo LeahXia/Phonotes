@@ -15,23 +15,22 @@ class NoteTakingViewModel: NSObject {
     
     // Photo manager
     let photoManager = PhotoManager()
-    lazy var photoCount = photoManager.fetchResult.count
     
     init(vc: NoteTakingViewController?) {
         self.vc = vc
     }
     
     func numberOfItems() -> Int {
-        return photoCount
+        return photoManager.fetchResult?.count ?? 0
     }
     
     func getPhotoForCell(forCell cell: PhotoPreviewCollectionViewCell, atIndexPath indexPath: IndexPath) -> Photo? {
-        let item = indexPath.item
-        if item < 0 || item >= photoCount {
+        guard let photoCount = photoManager.fetchResult?.count,
+            indexPath.item < photoCount else {
             return nil
         }
         
-        guard let photo = photoManager.fetchPhoto(forCell: cell, atIndexPath: indexPath) else { return nil }
+        let photo = photoManager.fetchPhoto(forCell: cell, atIndexPath: indexPath)
         
         return photo
     }
@@ -56,7 +55,11 @@ extension NoteTakingViewModel {
     }
     
     func setInitPhoto() {
-        let asset = photoManager.fetchResult.object(at: 2)
+        guard let fetchResult = photoManager.fetchResult,
+            fetchResult.count > 0
+        else { return }
+        
+        let asset = fetchResult.count > 4 ? fetchResult.object(at: 2) : fetchResult.object(at: 0)
         photoManager.loadLargeImage(asset: asset) { [weak self] (image) in
             self?.vc?.largePhotoImageView.image = image
         }
