@@ -16,12 +16,12 @@ class Photo {
     var asset: PHAsset
     var note: Note?
     
-    init(photoId: String, photo: UIImage, creationDate: Date?, asset: PHAsset) {
+    init(photoId: String, photo: UIImage, creationDate: Date?, asset: PHAsset, noteManager: NoteManager) {
         self.photoId = photoId
         self.photo = photo
         self.creationDate = creationDate
         self.asset = asset
-        self.note = NoteManager().getNote(by: photoId)
+        self.note = noteManager.getNote(by: photoId)
     }
     
     func getFormattedCreationDate() -> String {

@@ -18,5 +18,4 @@ struct Colors {
     static let backgroundColor = UIColor.rgb(red: 29, green: 29, blue: 29)
     static let primaryColor = UIColor.rgb(red: 255, green: 84, blue: 84)
     static let placeholderColor = UIColor.rgb(red: 139, green: 139, blue: 139)
-
 }

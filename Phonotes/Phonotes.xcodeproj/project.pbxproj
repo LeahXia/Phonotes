@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0803B72022E51C2C00A9AF32 /* NoteTakingPhotoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803B71F22E51C2C00A9AF32 /* NoteTakingPhotoCellViewModel.swift */; };
 		085C912822B5F55A00D01384 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C912722B5F55A00D01384 /* Note.swift */; };
 		085C912A22B5F66900D01384 /* NoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C912922B5F66900D01384 /* NoteManager.swift */; };
 		08BA8CFD22AC33E20067F4AC /* NoteTakingVCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA8CFC22AC33E20067F4AC /* NoteTakingVCUITests.swift */; };
@@ -15,6 +16,7 @@
 		08BA8D0522ADF0B40067F4AC /* PhotoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA8D0422ADF0B40067F4AC /* PhotoTests.swift */; };
 		08BA8D0722ADF6990067F4AC /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA8D0622ADF6990067F4AC /* PhotoManager.swift */; };
 		08BA8D8722B21DE60067F4AC /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA8D8622B21DE60067F4AC /* DateExtension.swift */; };
+		08CB860C22FE7ABF001FEE3E /* PhotoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB860B22FE7ABF001FEE3E /* PhotoProtocol.swift */; };
 		08F603C2229211AE000B5E96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F603C1229211AE000B5E96 /* AppDelegate.swift */; };
 		08F603C4229211AE000B5E96 /* NoteTakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F603C3229211AE000B5E96 /* NoteTakingViewController.swift */; };
 		08F603C7229211AE000B5E96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08F603C5229211AE000B5E96 /* Main.storyboard */; };
@@ -49,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0803B71F22E51C2C00A9AF32 /* NoteTakingPhotoCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTakingPhotoCellViewModel.swift; sourceTree = "<group>"; };
 		085C912722B5F55A00D01384 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		085C912922B5F66900D01384 /* NoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManager.swift; sourceTree = "<group>"; };
 		08BA8CFC22AC33E20067F4AC /* NoteTakingVCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTakingVCUITests.swift; sourceTree = "<group>"; };
@@ -56,6 +59,7 @@
 		08BA8D0422ADF0B40067F4AC /* PhotoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTests.swift; sourceTree = "<group>"; };
 		08BA8D0622ADF6990067F4AC /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		08BA8D8622B21DE60067F4AC /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		08CB860B22FE7ABF001FEE3E /* PhotoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoProtocol.swift; sourceTree = "<group>"; };
 		08F603BE229211AE000B5E96 /* Phonotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phonotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08F603C1229211AE000B5E96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08F603C3229211AE000B5E96 /* NoteTakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTakingViewController.swift; sourceTree = "<group>"; };
@@ -112,10 +116,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		08BA8CFF22ACD3950067F4AC /* ViewModel */ = {
+		0803B71C22E4EA2900A9AF32 /* NoteTakingViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				08BA8D0022ACD3F00067F4AC /* NoteTakingViewModel.swift */,
+				0803B71F22E51C2C00A9AF32 /* NoteTakingPhotoCellViewModel.swift */,
+			);
+			path = NoteTakingViewModels;
+			sourceTree = "<group>";
+		};
+		08BA8CFF22ACD3950067F4AC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0803B71C22E4EA2900A9AF32 /* NoteTakingViewModels */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -126,6 +139,23 @@
 				08BA8D8622B21DE60067F4AC /* DateExtension.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		08CB860722FE7A0B001FEE3E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				08BA8D0622ADF6990067F4AC /* PhotoManager.swift */,
+				085C912922B5F66900D01384 /* NoteManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		08CB860A22FE7A9B001FEE3E /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				08CB860B22FE7ABF001FEE3E /* PhotoProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		08F603B5229211AE000B5E96 = {
@@ -153,16 +183,19 @@
 		08F603C0229211AE000B5E96 /* Phonotes */ = {
 			isa = PBXGroup;
 			children = (
-				08F603F022921F21000B5E96 /* Controllers */,
-				08BA8CFF22ACD3950067F4AC /* ViewModel */,
 				08F603F122921F38000B5E96 /* Views */,
+				08BA8CFF22ACD3950067F4AC /* ViewModel */,
 				08F603F222921F3E000B5E96 /* Models */,
+				08CB860722FE7A0B001FEE3E /* Services */,
+				08CB860A22FE7A9B001FEE3E /* Protocols */,
 				08BA8D8522B21D960067F4AC /* Helper */,
 				08F603EF22921F0D000B5E96 /* Constants */,
 				08F603F72292319A000B5E96 /* Fonts */,
 				08F603C1229211AE000B5E96 /* AppDelegate.swift */,
 				08F603CD229211B0000B5E96 /* Info.plist */,
 				08F603F522922154000B5E96 /* Assets.xcassets */,
+				08F603C5229211AE000B5E96 /* Main.storyboard */,
+				08F603CA229211B0000B5E96 /* LaunchScreen.storyboard */,
 			);
 			path = Phonotes;
 			sourceTree = "<group>";
@@ -195,19 +228,10 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		08F603F022921F21000B5E96 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				08F603C3229211AE000B5E96 /* NoteTakingViewController.swift */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
 		08F603F122921F38000B5E96 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				08F603C5229211AE000B5E96 /* Main.storyboard */,
-				08F603CA229211B0000B5E96 /* LaunchScreen.storyboard */,
+				08F603C3229211AE000B5E96 /* NoteTakingViewController.swift */,
 				08F603FA22926027000B5E96 /* PhotoPreviewCollectionViewCell.swift */,
 			);
 			path = Views;
@@ -217,9 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				08F603FC22926E8F000B5E96 /* Photo.swift */,
-				08BA8D0622ADF6990067F4AC /* PhotoManager.swift */,
 				085C912722B5F55A00D01384 /* Note.swift */,
-				085C912922B5F66900D01384 /* NoteManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -472,11 +494,13 @@
 				08F6040122928F7B000B5E96 /* Fonts.swift in Sources */,
 				08F603C4229211AE000B5E96 /* NoteTakingViewController.swift in Sources */,
 				08F603F422921F5C000B5E96 /* Colors.swift in Sources */,
+				0803B72022E51C2C00A9AF32 /* NoteTakingPhotoCellViewModel.swift in Sources */,
 				08F603FB22926027000B5E96 /* PhotoPreviewCollectionViewCell.swift in Sources */,
 				08BA8D0122ACD3F00067F4AC /* NoteTakingViewModel.swift in Sources */,
 				08F603C2229211AE000B5E96 /* AppDelegate.swift in Sources */,
 				08BA8D8722B21DE60067F4AC /* DateExtension.swift in Sources */,
 				08F603FD22926E8F000B5E96 /* Photo.swift in Sources */,
+				08CB860C22FE7ABF001FEE3E /* PhotoProtocol.swift in Sources */,
 				08BA8D0722ADF6990067F4AC /* PhotoManager.swift in Sources */,
 				085C912A22B5F66900D01384 /* NoteManager.swift in Sources */,
 				08F603FF22927D82000B5E96 /* Constants.swift in Sources */,
@@ -665,7 +689,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Leah-Xia.Phonotes";
+				PRODUCT_BUNDLE_IDENTIFIER = com.leahxia.PhoNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -685,7 +709,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Leah-Xia.Phonotes";
+				PRODUCT_BUNDLE_IDENTIFIER = com.leahxia.PhoNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

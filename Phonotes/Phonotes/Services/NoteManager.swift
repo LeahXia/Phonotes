@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class NoteManager: NSObject {
+final class NoteManager: NSObject {
     var realm: Realm?
     
     override init() {
@@ -25,7 +25,7 @@ class NoteManager: NSObject {
         return note
     }
     
-    func saveNote(photoId: String, noteTitle: String?, noteDetail: String?, completion: @escaping (String?) -> Void) {
+    func saveNote(photoId: String, noteTitle: String?, noteDetail: String?, completion: @escaping (Note?) -> Void) {
         let note = Note()
         note.photoId = photoId
         note.hasNote = !(noteTitle?.isEmpty ?? true && noteDetail?.isEmpty ?? true)
@@ -35,11 +35,10 @@ class NoteManager: NSObject {
         do {
             try realm?.write {
                 realm?.add(note, update: .all)
-                completion(nil)
+                completion(note)
             }
         } catch {
-            completion(error.localizedDescription)
+            completion(nil)
         }
-        
     }
 }
